@@ -1,0 +1,6 @@
+Authlib==1.2.0
+pandas==1.4.4
+protobuf==4.22.0
+python-dotenv==0.21.1
+google-cloud-bigquery
+google-cloud-storage

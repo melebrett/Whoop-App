@@ -1,0 +1,3 @@
+[submodule "whoop"]
+	path = whoop
+	url = https://github.com/hedgertronic/whoop.git
