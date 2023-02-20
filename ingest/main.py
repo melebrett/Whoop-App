@@ -36,11 +36,11 @@ def main():
     except:
         print('failed to retrieve data')
 
-    ing = ingest()
-    ing.uploadBlobCSV("cycles.csv","data/cycles.csv")
-    ing.uploadBlobCSV("recovery.csv","data/recovery.csv")
-    ing.uploadBlobCSV("sleep.csv","data/sleep.csv")
-    ing.uploadBlobCSV("workouts.csv","data/workouts.csv")
+    # ing = ingest()
+    # ing.uploadBlobCSV("cycles.csv","data/cycles.csv")
+    # ing.uploadBlobCSV("recovery.csv","data/recovery.csv")
+    # ing.uploadBlobCSV("sleep.csv","data/sleep.csv")
+    # ing.uploadBlobCSV("workouts.csv","data/workouts.csv")
 
 if __name__ == '__main__':
     main()
