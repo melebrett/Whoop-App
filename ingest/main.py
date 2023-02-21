@@ -54,7 +54,7 @@ def ingest(bucketname):
 
     return [cycles, recovery, sleep, workouts]
 
-if __name__ == '__main__':
+def main():
     try:
         # bucket = os.getenv("WHOOPDATABUCKET")
         bucket = "whoopdata"
@@ -62,3 +62,7 @@ if __name__ == '__main__':
         print("Success!")
     except:
         print("Failed!")
+
+
+if __name__ == '__main__':
+    main()
