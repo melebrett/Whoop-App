@@ -14,7 +14,7 @@ COPY . /app
 RUN pip3 install -r requirements.txt
 
 # Define environment variables
-ENV USERNAME user
+ENV EMAIL "brettmmele@gmail.com"
 ENV PASSWORD pwd
 
 # Run the command to start the container

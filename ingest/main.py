@@ -7,12 +7,12 @@ from google.cloud import storage
 from pyWhoop import whoop
 from dotenv import load_dotenv
 
+load_dotenv()
+
 def retrieve(sleepfile, recoveryfile, cyclesfile, workoutsfile):
 
-    load_dotenv()
-
-    username = os.getenv("USERNAME") or ""
-    pw = os.getenv("PASSWORD") or ""
+    username = os.getenv("EMAIL")
+    pw = os.getenv("PASSWORD")
     client = whoop.WhoopClient(username=username, password=pw, authenticate=False)
     client.authenticate()
 
@@ -70,9 +70,10 @@ def main():
         bucket = "whoopdata"
         locations = ingest(bucket)
         print("Success!")
-    except:
-        print("Failed!")
-
+    except Exception as e:
+        print(f"Failed!... error: {e}")
+        print(os.getenv('EMAIL'))
+        print(os.getenv('PASSWORD'))
 
 if __name__ == '__main__':
     main()
