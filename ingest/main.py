@@ -5,9 +5,9 @@ import os
 import tempfile
 from google.cloud import storage
 from pyWhoop import whoop
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-# load_dotenv()
+load_dotenv()
 
 def retrieve(sleepfile, recoveryfile, cyclesfile, workoutsfile):
 
