@@ -2,12 +2,12 @@ import pandas as pd
 import datetime
 import google
 import os
+import tempfile
 from google.cloud import storage
 from pyWhoop import whoop
-# from ingest import ingest
 from dotenv import load_dotenv
 
-def retrieve():
+def retrieve(sleepfile, recoveryfile, cyclesfile, workoutsfile):
 
     load_dotenv()
 
@@ -27,10 +27,10 @@ def retrieve():
     cycles = client.get_cycle_collection("2019-01-01",str(today))
     df_cycles = pd.json_normalize(cycles)
 
-    df_sleep.to_csv("data/sleep.csv", index=False)
-    df_recovery.to_csv("data/recovery.csv", index=False)
-    df_cycles.to_csv("data/cycles.csv", index=False)
-    df_workouts.to_csv("data/workouts.csv", index=False)
+    df_sleep.to_csv(sleepfile, index=False)
+    df_recovery.to_csv(recoveryfile, index=False)
+    df_cycles.to_csv(cyclesfile, index=False)
+    df_workouts.to_csv(workoutsfile, index=False)
 
 def upload(bucketname, filename, blobname):
 
@@ -45,12 +45,22 @@ def upload(bucketname, filename, blobname):
 
 
 def ingest(bucketname):
+
+    sf = tempfile.NamedTemporaryFile(suffix='.csv')
+    rf = tempfile.NamedTemporaryFile(suffix='.csv')
+    cf = tempfile.NamedTemporaryFile(suffix='.csv')
+    wf = tempfile.NamedTemporaryFile(suffix='.csv')
     
-    retrieve()
-    cycles = upload(bucketname, "data/cycles.csv", "cycles.csv")
-    recovery = upload(bucketname, "data/recovery.csv", "recovery.csv")
-    sleep = upload(bucketname, "data/sleep.csv", "sleep.csv")
-    workouts = upload(bucketname, "data/wourkouts.csv", "workouts.csv")
+    retrieve(sf.name,rf.name,cf.name,wf.name)
+    cycles = upload(bucketname, cf.name, "cycles.csv")
+    recovery = upload(bucketname, rf.name, "recovery.csv")
+    sleep = upload(bucketname, sf.name, "sleep.csv")
+    workouts = upload(bucketname, wf.name, "workouts.csv")
+
+    sf.close()
+    rf.close()
+    cf.close()
+    wf.close()
 
     return [cycles, recovery, sleep, workouts]
 
