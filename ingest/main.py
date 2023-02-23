@@ -5,15 +5,17 @@ import os
 import tempfile
 from google.cloud import storage
 from pyWhoop import whoop
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 def retrieve(sleepfile, recoveryfile, cyclesfile, workoutsfile):
 
-    username = os.getenv("EMAIL")
-    pw = os.getenv("PASSWORD")
-    client = whoop.WhoopClient(username=username, password=pw, authenticate=False)
+    # username = os.getenv("EMAIL")
+    # pw = os.getenv("PASSWORD")
+    user = "brettmmele@gmail.com"
+    pwd = "uX8ZARtpyVe6wZX"
+    client = whoop.WhoopClient(username=user, password=pwd, authenticate=False)
     client.authenticate()
 
     today = datetime.date.today()
