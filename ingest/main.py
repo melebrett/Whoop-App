@@ -74,8 +74,8 @@ def main():
         print("Success!")
     except Exception as e:
         print(f"Failed!... error: {e}")
-        print(os.getenv('EMAIL'))
-        print(os.getenv('PASSWORD'))
+        # print(os.getenv('EMAIL'))
+        # print(os.getenv('PASSWORD'))
 
 if __name__ == '__main__':
     main()
