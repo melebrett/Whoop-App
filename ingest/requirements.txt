@@ -3,3 +3,5 @@ pandas==1.4.4
 protobuf==4.22.0
 python-dotenv==0.21.1
 google-cloud-storage
+google-cloud-bigquery
+gunicorn==20.1.0
