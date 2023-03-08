@@ -11,11 +11,7 @@ WORKDIR /app
 COPY . /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip3 install -r requirements.txt
-
-# Define environment variables
-ENV EMAIL "brettmmele@gmail.com"
-ENV PASSWORD "uX8ZARtpyVe6wZX"
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Run the command to start the container
 CMD ["python3", "main.py"]

@@ -144,7 +144,7 @@ def main():
     )
 
     try:
-        pandas_gbq.to_gbq(whoop_daily_with_workouts, 'whoopdataset.whoopmerge', project_id=project_id)
+        pandas_gbq.to_gbq(whoop_daily_with_workouts, 'whoopdataset.whoopmerge', project_id=project_id, if_exists='replace')
         print("success")
 
     except Exception as e:
