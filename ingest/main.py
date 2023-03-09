@@ -7,8 +7,6 @@ from google.cloud import storage
 from pyWhoop import whoop
 from dotenv import load_dotenv
 
-load_dotenv()
-
 def retrieve(sleepfile, recoveryfile, cyclesfile, workoutsfile):
 
     # username = os.getenv("EMAIL")
@@ -20,6 +18,7 @@ def retrieve(sleepfile, recoveryfile, cyclesfile, workoutsfile):
 
     today = datetime.date.today()
 
+    print('retrieving data')
     sleep = client.get_sleep_collection("2019-01-01",str(today))
     df_sleep = pd.json_normalize(sleep)
     recovery = client.get_recovery_collection("2019-01-01",str(today))
@@ -29,6 +28,7 @@ def retrieve(sleepfile, recoveryfile, cyclesfile, workoutsfile):
     cycles = client.get_cycle_collection("2019-01-01",str(today))
     df_cycles = pd.json_normalize(cycles)
 
+    print('data retrieved, writing to temp files')
     df_sleep.to_csv(sleepfile, index=False)
     df_recovery.to_csv(recoveryfile, index=False)
     df_cycles.to_csv(cyclesfile, index=False)
@@ -36,18 +36,20 @@ def retrieve(sleepfile, recoveryfile, cyclesfile, workoutsfile):
 
 def upload(bucketname, filename, blobname):
 
-    client = storage.Client()
+    print('uploading files to blob')
+    client = storage.Client(project='msds434-whoop-app')
     bucket = client.get_bucket(bucketname)
     blob = storage.Blob(blobname, bucket)
     blob.upload_from_filename(filename)
     gcslocation = 'gs://{}/{}'.format(bucketname, blobname)
-    print ('Uploaded {} ...'.format(gcslocation))
+    print ('Uploaded')
 
     return gcslocation
 
 
 def ingest(bucketname):
 
+    print('begin ingest')
     sf = tempfile.NamedTemporaryFile(suffix='.csv')
     rf = tempfile.NamedTemporaryFile(suffix='.csv')
     cf = tempfile.NamedTemporaryFile(suffix='.csv')
@@ -67,15 +69,16 @@ def ingest(bucketname):
     return [cycles, recovery, sleep, workouts]
 
 def main():
-    try:
-        # bucket = os.getenv("WHOOPDATABUCKET")
-        bucket = "whoopdata"
-        locations = ingest(bucket)
-        print("Success!")
-    except Exception as e:
-        print(f"Failed!... error: {e}")
-        # print(os.getenv('EMAIL'))
-        # print(os.getenv('PASSWORD'))
+    load_dotenv()
+    # bucket = os.getenv("WHOOPDATABUCKET")
+    bucket = "whoopdata"
+    locations = ingest(bucket)
+    print("Success!")
+    # print(os.getenv('EMAIL'))
+    # print(os.getenv('PASSWORD'))
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(f"failed: {e}")
