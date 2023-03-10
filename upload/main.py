@@ -12,6 +12,8 @@ def main():
         autodetect=True
     )
 
+    job_config.write_disposition = 'WRITE_TRUNCATE'
+
     files = ['cycles.csv','recovery.csv','workouts.csv','sleep.csv']
     for i in files:
         try:
