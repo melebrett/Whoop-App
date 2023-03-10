@@ -1,33 +1,9 @@
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bq'
+- name: gcr.io/cloud-builders/docker
   args:
-  - 'load'
-  - '--autodetect'
-  - '--source_format=CSV'
-  - 'whoopdataset.cycles'
-  - 'gs://whoopdata/cycles.csv'
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bq'
-  args:
-  - 'load'
-  - '--autodetect'
-  - '--source_format=CSV'
-  - 'whoopdataset.recovery'
-  - 'gs://whoopdata/recovery.csv'
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bq'
-  args:
-  - 'load'
-  - '--autodetect'
-  - '--source_format=CSV'
-  - 'whoopdataset.sleep'
-  - 'gs://whoopdata/sleep.csv'
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bq'
-  args:
-  - 'load'
-  - '--autodetect'
-  - '--source_format=CSV'
-  - 'whoopdataset.workouts'
-  - 'gs://whoopdata/workouts.csv'
+  - build
+  - '-t'
+  - 'gcr.io/msds434-whoop-app/whoop-upload'
+  - '.'
+images:
+- 'gcr.io/msds434-whoop-app/whoop-upload'
