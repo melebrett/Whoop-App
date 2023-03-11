@@ -1,0 +1,9 @@
+steps:
+- name: gcr.io/cloud-builders/docker
+  args:
+  - build
+  - '-t'
+  - 'gcr.io/msds434-whoop-app/whoop-app'
+  - '.'
+images:
+- 'gcr.io/msds434-whoop-app/whoop-app'
