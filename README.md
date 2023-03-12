@@ -2,6 +2,10 @@
 
 Web app to display recent Whoop data along with ML model predictions to use for inference about the impact of behaviors on sleep, recovery, strain.
 
+More info on whoop: https://www.whoop.com/
+
+App: https://whoop-app-oc5t7fetca-uc.a.run.app/
+
 ## 1. Ingest
 
 Retrieve data from [Whoop API](https://developer.whoop.com/api/) and store in blob storage.
