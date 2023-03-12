@@ -14,7 +14,6 @@ library(gtExtras)
 library(ggplot2)
 library(gargle)
 
-
 project_id <- "msds434-whoop-app"
 tokens <- token_fetch(scopes = "https://www.googleapis.com/auth/cloud-platform", "apisvckey.json")
 access_token <- tokens$credentials$access_token
