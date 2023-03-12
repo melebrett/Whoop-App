@@ -6,26 +6,29 @@ More info on whoop: https://www.whoop.com/
 
 App: https://whoop-app-oc5t7fetca-uc.a.run.app/
 
-## 1. Ingest
+
+## Workflow
+### 1. Ingest
 
 Retrieve data from [Whoop API](https://developer.whoop.com/api/) and store in blob storage.
 
-## 2. Upload
+### 2. Upload
 
 Move blobs in cloud storage to BigQuery tables
 
-## 3. Process
+### 3. Process
 
 Transform and merge raw data, write to new BQ table.
 
-## 4. Models
+### 4. Models
 
 Build models to predict recovery, workout strain, hrv etc. Upload models to cloud storage buckets, register to vertexAI and set up model API endpoints.
 
-## 5. App
+### 5. App
 
 R shiny front end dashboard to display recovery and workout history, along with model predictions. 
 
+## Notes
 
 Each step is a containerized service, with docker images pushed to Google artifact registry and containers built/run via cloud build/run. 
 
