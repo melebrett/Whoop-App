@@ -11,25 +11,15 @@ library(jsonlite)
 library(paletteer)
 library(gt)
 library(gtExtras)
-library(glue)
-library(IRdisplay)
 library(ggplot2)
+library(gargle)
 
-sh <- function(cmd, args = c(), intern = FALSE) {
-  if (is.null(args)) {
-    cmd <- glue(cmd)
-    s <- strsplit(cmd, " ")[[1]]
-    cmd <- s[1]
-    args <- s[2:length(s)]
-  }
-  ret <- system2(cmd, args, stdout = TRUE, stderr = TRUE)
-  if ("errmsg" %in% attributes(attributes(ret))$names) cat(attr(ret, "errmsg"), "\n")
-  if (intern) return(ret) else cat(paste(ret, collapse = "\n"))
-}
 
 project_id <- "msds434-whoop-app"
-access_token <- sh("gcloud auth print-access-token", intern = TRUE)
+tokens <- token_fetch(scopes = "https://www.googleapis.com/auth/cloud-platform", "apisvckey.json")
+access_token <- tokens$credentials$access_token
 sql <- "select * from `whoopdataset.whoopmerge`"
+
 
 recovery_model <- 5990825443379380224
 # hrv_model <- 4989337476242866176
