@@ -1,4 +1,4 @@
-# MSDS434 (Analytics Application Engineering) Final Project
+# Analytics Application Engineering (MSDS 434) Final Project
 
 This project is a web application that displays recent Whoop data along with ML model predictions to use for inference about the impact of behaviors on sleep, recovery, strain. All services were hosted in a GCP project.
 
