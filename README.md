@@ -1,4 +1,8 @@
-# Whoop App (434 Analytics Application Engineering Final Project)
+MSDS434 Analytics Application Engineering
+Final Project
+3/20/2023
+
+# Whoop App
 
 This project is a web application that displays recent Whoop data along with ML model predictions to use for inference about the impact of behaviors on sleep, recovery, strain. All services were hosted in a GCP project.
 
